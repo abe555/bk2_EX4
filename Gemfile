@@ -9,7 +9,7 @@ gem 'actionpack', '>= 5.2.4.3'
 gem 'activestorage', '>= 5.2.4.3'
 gem 'activesupport', '>= 5.2.4.3'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', '~> 1.3.6'
 # Use Puma as the app server
 gem 'puma', '>= 3.12.6'
 # Use SCSS for stylesheets
@@ -65,4 +65,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'refile', require: 'refile/rails', github: 'manfe/refile'
 gem 'refile-mini_magick'
+gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails'

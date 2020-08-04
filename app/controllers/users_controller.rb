@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:update]
 
   def show
@@ -9,18 +10,43 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @user = current_user
     @book = Book.new
+  end
 
   def edit
     @user = User.find(params[:id])
+    if current_user == @user
+      @user = User.find(params[:id])
+    else
+      flash[:notice] = "error!"
+      redirect_to user_path(current_user.id)
+    end
   end
 
   def update
-    if @user.update(user_params)
-      redirect_to users_path(@user), notice: "You have updated user successfully."
+    user = User.find(params[:id])
+    if user.update(user_params)
+      redirect_to user_path(user.id), notice: "You have updated user successfully."
     else
-      render "show"
+      flash[:notice] = "error!"
+      redirect_to user_path(user.id)
     end
+  end
+
+  def destroy
+    flash[:notice] = "Signed out successfully"
+    redirect_to root_path
+  end
+
+  def follows
+    user = User.find(params[:id])
+    @users = user.followings
+  end
+
+  def followers
+    user = User.find(params[:id])
+    @users = user.followers
   end
 
   private
@@ -33,5 +59,5 @@ class UsersController < ApplicationController
     unless @user == current_user
       redirect_to user_path(current_user)
     end
-  end
+ end
 end
