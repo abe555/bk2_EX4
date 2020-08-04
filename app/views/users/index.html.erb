@@ -26,6 +26,13 @@
 				<tr>
 					<td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %></td>
 					<td><%= user.name %></td>
+					<!--フォロー機能-->
+					<td>
+						
+					</td>
+
+
+					<!--フォロー機能おわり-->
 					<td><%= link_to "Show", user_path(user), class: "user_#{user.id}" %></td>
 				</tr>
 				<% end %>
